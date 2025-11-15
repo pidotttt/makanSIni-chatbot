@@ -1,0 +1,39 @@
+Timestamp,Restaurant Name,Range spending per meal,Minimum spending per person  (eg: RM5),Maximum spending per person (eg: RM15),Dining Tag,Is this restaurant Halal?,Cuisine Tag,Operating Hours (eg: 8.00am - 3.00pm),Operating Days,"Travel time from UTP (in mins, eg: 6 mins)",Location/Area,Rating
+11/11/2025 23:06:52,Cafe V4,RM5 - RM10,1,20,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Malay, Chinese, Nasi Campur, Thailand, Dessert, Coffee",07.00am - 10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,2
+11/11/2025 23:11:43,tomyam sr,RM5 - RM10,5,15,Dinner,Yes,"Malay, Thailand",5 pm - 2 am,"Monday, Tuesday, Thursday, Friday, Saturday, Sunday",10,Tronoh,4
+11/11/2025 23:26:03,SR TOMYAMA,RM5 - RM10,3,10,Dinner,Yes,"Malay, Thailand",5.00pm - 2.00am,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",5,Tronoh,5
+11/11/2025 23:32:51,SR Tomyam,RM5 - RM10,6,11,Dinner,Yes,Thailand,5pm - 2am,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",10,Tronoh,5
+11/11/2025 23:50:20,Madam krua,RM5 - RM10,5,10,Dinner,Yes,"Malay, Western",Evening till 11,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",10,Bandar Universiti,4
+11/12/2025 0:03:48,Ayam gepuk tokpa,RM16 - RM20,6,16,"Lunch, Dinner",Yes,Malay,11am-6pm,"Monday, Wednesday, Thursday, Friday, Saturday, Sunday",7,Bota,5
+11/12/2025 2:22:00,Cafe V1,RM5 - RM10,1,20,"Breakfast, Lunch, Dinner",Yes,"Malay, Nasi Campur",8.00am - 10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,2
+11/12/2025 2:23:03,Cafe V2,RM5 - RM10,1,20,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Malay, Fast Food, Nasi Campur, Arabic",8.00am - 3.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,3
+11/12/2025 2:24:09,Cafe V5,RM 11- RM15,10,30,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Malay, Chinese, Indian, Nasi Campur, Thailand, Arabic, Beverage",8.00am - 12.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,5
+11/12/2025 2:26:40,McDonald's Seri Iskandar,More than RM20,10,50,"Breakfast, Lunch, Dinner",Yes,"Fast Food, Dessert, Beverage, Western",9.00am - 12.00am,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",10,Bandar Universiti,5
+11/12/2025 16:41:02,Nasi Campur Chef Mazlan,RM5 - RM10,3,15,Lunch,Yes,"Malay, Nasi Campur",12.00pm-2.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday",7,SIBC,5
+11/12/2025 16:41:02,Nur Khayla Pecel Lele,RM5 - RM10,8,14,"Lunch, Dinner",Yes,Indonesian,11AM-10PM,"Monday, Tuesday, Wednesday, Thursday, Friday, Sunday",8,Bandar Universiti,5
+11/12/2025 18:37:13,Marrybrown Restaurant,RM 11- RM15,12,30,"Lunch, Dinner",Yes,"Malay, Chinese, Indian, Korean, Fast Food", 9.00am - 11.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",6,SIBC,4
+11/12/2025 18:55:59,Ayam Gepuk Pak Gendut,RM 11- RM15,11.5,16.5,Lunch,Yes,Malay,11.00am - 7.00pm,"Monday, Tuesday, Wednesday, Thursday, Saturday, Sunday",10,SIBC,5
+11/12/2025 20:00:52,restoran bunda,RM5 - RM10,7,15,Lunch,Yes,Malay,11am - 6pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",7,Tronoh,4
+11/12/2025 21:51:20,Ayam Gepuk Pak Gembus,RM 11- RM15,10,20,"Lunch, Dinner",Yes,"Malay, Indonesian",11.00am - 10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",10,SIBC,3
+11/12/2025 21:54:35,Ayam Gepuk Angah,RM 11- RM15,10,15,Lunch,Yes,"Malay, Indonesian",11.00 am - 4.00 pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,3
+11/12/2025 22:09:29,Kunyah@Safa,More than RM20,10,30,"Lunch, Tea Time",Yes,"Malay, Chinese, Dessert, Beverage, Western",11.00am - 7.00pm,"Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",15,SIBC,4
+11/12/2025 22:53:54,Black caravan,RM16 - RM20,8,40,Dinner,Yes,Western,12.00pm - 11pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday",8,Bandar Universiti,4
+11/12/2025 22:56:52,Bundut coffee ,RM 11- RM15,4,12,"Tea Time, Dinner",Yes,"Dessert, Beverage",3pm - 12am,"Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,5
+11/12/2025 23:08:19,Mouthgasm,RM 11- RM15,4,25,Dinner,Yes,Fast Food,5.00pm - 11.30pm,"Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,4
+11/12/2025 23:17:22,A&W,RM16 - RM20,4,20,"Lunch, Tea Time, Dinner",Yes,Fast Food,10.00am - 10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,4
+11/12/2025 23:20:42,Rahman's corner ,RM5 - RM10,2,15,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Malay, Mamak, Indian",24hrs,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",10,Bota,5
+11/12/2025 23:25:53,Ayam Kunyit Lareed,RM5 - RM10,12,6,Lunch,Yes,Malay,11.00am - 4.00pm,"Monday, Tuesday, Wednesday, Thursday, Saturday, Sunday",8,Bandar Universiti,5
+11/12/2025 23:27:10,Meeting Point,RM5 - RM10,5,20,Dinner,Yes,"Malay, Thailand",6.00pm-3.00am,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,4
+11/12/2025 23:29:29,E One Roti Doll,RM5 - RM10,2,10,Breakfast,Yes,Malay,7.00am-12.30pm,"Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",7,Bandar Universiti,5
+11/12/2025 23:30:28,Nasi Lemak Cik Yang,RM5 - RM10,6,15,Breakfast,Yes,Malay,7.00am-1.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",7,SIBC,4
+11/12/2025 23:31:47,Harraz Cafe,RM5 - RM10,5,15,"Breakfast, Lunch, Tea Time",Yes,"Malay, Nasi Campur, Western",7.00am-10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,4
+11/12/2025 23:32:29,Kafe Sayang,RM5 - RM10,5,10,"Breakfast, Lunch",Yes,"Malay, Nasi Campur",7.00am-2.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday",0,Inside UTP,4
+11/12/2025 23:33:32,Cendol Leman,RM5 - RM10,3,10,"Lunch, Tea Time",Yes,"Malay, Dessert, Beverage",1.00pm-6.00pm,"Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",6,Bandar Universiti,4
+11/12/2025 23:34:36,Beruas Burger,RM5 - RM10,5,20,Dinner,Yes,"Malay, Fast Food",7.00pm-1.00am,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",7,SIBC,4
+11/12/2025 23:35:46,Kenangan Coffee,RM 11- RM15,10,20,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Dessert, Beverage",7.00am-11.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,3
+11/12/2025 23:36:31,Signature Nasi Ayam,RM5 - RM10,6,12,"Lunch, Tea Time, Dinner",Yes,Malay,10.00am-10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",0,Inside UTP,4
+11/12/2025 23:37:27,ZUS Coffee,RM5 - RM10,8,16,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Fast Food, Dessert, Beverage",7.00am-10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,4
+11/12/2025 23:38:27,Kopi Saigon,RM5 - RM10,7,15,"Lunch, Tea Time, Dinner",Yes,Beverage,10.00am-10.00pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",8,SIBC,4
+11/13/2025 11:04:36,Utama,RM5 - RM10,9,20,Dinner,Yes,"Malay, Kelantan",5pm - 2pm,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",5,SIBC,5
+11/14/2025 21:54:56,Rahman Corner,RM 11- RM15,10,20,"Breakfast, Lunch, Tea Time, Dinner",Yes,Mamak,24 hpurs,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",30,Bandar Universiti,3
+11/15/2025 16:45:54,Rahman,RM5 - RM10,4,10,"Breakfast, Lunch, Tea Time, Dinner",Yes,"Malay, Mamak, Indian, Nasi Campur",24 hrs ,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",6,SIBC,5
