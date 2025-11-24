@@ -85,6 +85,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     halal_pref = preferences.get("halal_pref") or ""
     location_pref = preferences.get("location_pref") or ""
     max_budget = preferences.get("max_budget")
+    budget_level = preferences.get("budget_level")
     max_travel = preferences.get("max_travel")
 
     # buang smua restos not open today
@@ -121,6 +122,17 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
         df.loc[fully_in_budget, "score_budget"] += 30  # best match
         df.loc[partially_in_budget, "score_budget"] += 15  # okay
         df.loc[over_budget, "score_budget"] -= 10  # should not be recommended
+        # Under budget penalty
+        if budget_level == "expensive":
+            # Very cheap places compared to user budget: max_spend <= 0.5 * budget
+            very_cheap = valid & max_spend_col.le(max_budget * 0.5)
+
+            # Slightly cheap but still okay: between 0.5 and 0.8 of budget
+            mid_price = valid & ~very_cheap & max_spend_col.le(max_budget * 0.8)
+
+            # Penalise very cheap strongly, mildly penalise mid-price
+            df.loc[very_cheap, "score_budget"] -= 20
+            df.loc[mid_price, "score_budget"] -= 5
 
     # ------------ MEALTYPE SCORING -------------------------
     if meal_type and meal_type.lower() != "any":
@@ -129,7 +141,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
 
     # ------------------- TRAVEL SCORING -------------------------
     if max_travel is not None:
-        df["score_travel"] += df["travel_mins"].le(max_travel) * 15
+        df["score_travel"] += df["travel_mins"].le(max_travel) * 10
 
     # ------------------- HALAL SCORING -------------------------
     if halal_pref:
@@ -142,19 +154,26 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     if location_pref and location_pref.lower() != "any":
         loc_series = df["location"].astype(str)
 
+        # smua yang ~Inside UTP considered "outside"
+        mask_inside = loc_series.str.contains("Inside UTP", case=False, na=False)
+        mask_outside = ~mask_inside
+
         if location_pref == "Outside UTP":
-            # smua yang ~Inside UTP considered "outside"
-            mask_inside = loc_series.str.contains("Inside UTP", case=False, na=False)
-            mask_outside = ~mask_inside
             # Reward every restos outside UTP
-            df.loc[mask_outside, "score_location"] += 10
+            df.loc[mask_outside, "score_location"] += 20
             # penalise every restos Inside UTP if user explicitly said outside
             df.loc[mask_inside, "score_location"] -= 10
+
+        elif location_pref == "Inside UTP":
+            # Penalise every restos outside UTP
+            df.loc[mask_outside, "score_location"] -= 10
+            # Reward every restos Inside UTP if user explicitly said outside
+            df.loc[mask_inside, "score_location"] += 20
 
         else:
             # Normal case: reward exact match to the preferred location
             mask_loc = loc_series.str.contains(location_pref, case=False, na=False)
-            df.loc[mask_loc, "score_location"] += 5
+            df.loc[mask_loc, "score_location"] += 20
 
     # ------------------------ RATING SCORING -------------------
     df["score_rating"] += df["rating"].fillna(0) * 2
@@ -263,6 +282,21 @@ BUDGET_VALUES = {
     "medium": 15.0,
     "expensive": 25.0
 }
+
+
+def pick_budget_level(text: str):
+    t = text.lower()
+    for level, syns in BUDGET_SYNONYMS.items():
+        if any(s in t for s in syns):
+            return level
+
+    m_num = re.search(r"(?:rm\s*|budget\s*|under\s*|below\s*)?(\d+)", t)
+    if m_num:
+        amount = float(m_num.group(1))
+        if amount >= 30:
+            return "expensive"
+
+    return None
 
 
 def pick_budget(text):
@@ -453,6 +487,7 @@ def parse_one_shot(t):
         "cuisine": cuisines[0] if cuisines else None,
         "cuisines": cuisines,
         "max_budget": pick_budget(t),
+        "budget_level": pick_budget_level(t),
         "meal_type": pick_meal_type(t),
         "max_travel": pick_travel(t),
         "halal_pref": pick_halal_pref(t),
@@ -465,12 +500,12 @@ def parse_one_shot(t):
 
 def prefs_summary(prefs):
     return (
-        f"- Cuisine: **{prefs.get('cuisine') or 'any cuisine'}**\n"
-        f"- Budget: **{('≤ RM'+str(int(prefs['max_budget']))) if prefs.get('max_budget') else 'any budget'}**\n"
-        f"- Meal: **{prefs.get('meal_type', 'Any')}**\n"
-        f"- Distance: **{('within '+str(int(prefs['max_travel']))+' mins') if prefs.get('max_travel') else 'any distance'}**\n"
-        f"- Preference: **{'halal only' if prefs.get('halal_pref','').startswith('Halal') else 'halal or non-halal'}**\n"
-        f"- Area: **{prefs.get('location_pref','Any')}**"
+        f"- <b>Cuisine:</b> {prefs.get('cuisines') or 'Any'}<br>"
+        f"- <b>Budget:</b> {('≤ RM' + str(int(prefs['max_budget']))) if prefs.get('max_budget') else 'Any'}<br>"
+        f"- <b>Meal Time:</b> {prefs.get('meal_type', 'Any')}<br>"
+        f"- <b>Distance:</b> {('within ' + str(int(prefs['max_travel'])) + ' mins') if prefs.get('max_travel') else 'Any'}<br>"
+        f"- <b>Halal?:</b> {'halal only' if prefs.get('halal_pref','').lower().startswith('halal') else ' - '}<br>"
+        f"- <b>Area:</b> {prefs.get('location_pref','Any')}"
     )
 # ===================================================
 
@@ -482,7 +517,7 @@ def prefs_summary(prefs):
 def init_session():
     if "messages" not in st.session_state:
         st.session_state.messages = [
-            {"role": "assistant", "text": "Hi! I'm MakanSini V3 🍜🤖<br><br>Tell me what you're craving in **one sentence**.<br><br>Example: `cheap halal Korean dinner within 10 minutes from UTP`", "small": False}
+            {"role": "assistant", "text": "Hi! I'm MakanSini V3 🍜🤖<br><br>Tell me what you're craving in <b>a sentence</b>.<br><br>Example: `cheap halal Korean dinner within 10 minutes from UTP`", "small": False}
         ]
 
 
@@ -580,7 +615,7 @@ def main():
         add_message(
             "assistant",
             "I couldn't catch any specific cuisine, budget, or distance 😅<br><br>"
-            "Try including at least one detail, e.g.:<br>"
+            "Try including <b>at least one detail</b>, e.g.:<br>"
             "- `cheap Malay food`<br>"
             "- `halal Western lunch under RM15`<br>"
             "- `any cuisine within 5 mins from UTP`"
@@ -595,18 +630,34 @@ def main():
     if ranked.empty:
         add_message(
             "assistant",
-            "Hmm… no restaurants matched **and** are open today 😔<br>"
+            "Hmm… no restaurants matched <b>and</b> are open today 😔<br>"
             "Try increasing distance or budget."
         )
         st.session_state["last_ranked"] = None
         st.rerun()
 
-    # build suggestions text
+    # ----------------- OPTIONAL RECS + THRESHOLD -----------------
+    # 1) Get top score
+    top_score = ranked["score"].iloc[0]
+
+    # 2) Define how far from top we still consider "relevant"
+    THRESHOLD_DIFF = 15
+
+    # Keep only restos with score within THRESHOLD_DIFF of the best one
+    close_enough = ranked[ranked["score"] >= top_score - THRESHOLD_DIFF]
+
+    # cap at max 3 results
+    results_to_show = close_enough.head(3)
+
+    if results_to_show.empty:
+        results_to_show = ranked.head(1)
+
+    # suggestion output
     lines = ["Here are some suggestions for you 👇<br><br>"]
-    for _, row in ranked.head(3).iterrows():
+    for _, row in results_to_show.iterrows():
         lines.append(
-            f"**{row['name']}** ({row['cuisine']})<br>"
-            f"💸 {row['spend_range']} | ⭐ {row['rating']}<br>"
+            f"<b>{row['name']}</b> ({row['cuisine']})<br>"
+            f"💸 RM{row['min_spend']} - RM{row['max_spend']} | ⭐ {row['rating']}<br>"
             f"📍 {row['location']} | ⏱ {row['travel_mins']} minutes<br>"
             f"🕌 Halal: {row['halal']}<br>"
             f"🕒 {row['hours']}<br>"
