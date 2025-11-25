@@ -23,7 +23,7 @@ st.markdown("""
 # Data loading & scoring
 # ==========================
 
-CSV_FILE = "Survey on Restaurant around Seri Iskandar (Responses) - Form Responses 1.csv"
+CSV_FILE = "Survey on Restaurant around Seri Iskandar (Responses) - Clean Version.csv"
 
 
 def load_catalog():
@@ -32,15 +32,15 @@ def load_catalog():
 
     df = df.rename(columns={
         "Restaurant Name": "name",
-        "Range spending per meal": "spend_range",
-        "Minimum spending per person  (eg: RM5)": "min_spend",
-        "Maximum spending per person (eg: RM15)": "max_spend",
-        "Dining Tag": "dining_tag",
-        "Is this restaurant Halal?": "halal",
+        "Range (min - max)": "spend_range",
+        "Minimum spending per person (RM)": "min_spend",
+        "Maximum spending per person (RM)": "max_spend",
+        "Dining tag": "dining_tag",
+        "Halal Status": "halal",
         "Cuisine Tag": "cuisine",
-        "Operating Hours (eg: 8.00am - 3.00pm)": "hours",
+        "Operating Hours": "hours",
         "Operating Days": "days",
-        "Travel time from UTP (in mins, eg: 6 mins)": "travel_mins",
+        "Travel Time from UTP": "travel_mins",
         "Location/Area": "location",
         "Rating": "rating",
     })
@@ -412,6 +412,8 @@ CUISINE_SYNONYMS = {
         "fries", "fish and chips", "pasta", "spaghetti",
         "carbonara", "bolognese", "lasagna", "grilled chicken"
     ],
+
+    "Indonesian": ["indo", "gepuk", "bakso", "penyet", "nasi padang"]
 }
 
 
