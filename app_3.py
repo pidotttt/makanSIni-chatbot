@@ -173,7 +173,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
         else:
             # Normal case: reward exact match to the preferred location
             mask_loc = loc_series.str.contains(location_pref, case=False, na=False)
-            df.loc[mask_loc, "score_location"] += 20
+            df.loc[mask_loc, "score_location"] += 30
 
     # ------------------------ RATING SCORING -------------------
     df["score_rating"] += df["rating"].fillna(0) * 2
@@ -613,14 +613,14 @@ def main():
     st.session_state["last_prefs"] = prefs
 
     # basic guard: need at least one strong signal
-    if not prefs["cuisine"] and prefs["max_budget"] is None and prefs["max_travel"] is None:
+    if not prefs["cuisine"] and prefs["max_budget"] is None and prefs["location"] is None:
         add_message(
             "assistant",
-            "I couldn't catch any specific cuisine, budget, or distance 😅<br><br>"
+            "I couldn't catch any specific cuisine, budget, or location 😅<br><br>"
             "Try including <b>at least one detail</b>, e.g.:<br>"
             "- `cheap Malay food`<br>"
             "- `halal Western lunch under RM15`<br>"
-            "- `any cuisine within 5 mins from UTP`"
+            "- `any cuisine outside UTP`"
         )
         st.rerun()
 
