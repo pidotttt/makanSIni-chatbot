@@ -613,7 +613,7 @@ def main():
     st.session_state["last_prefs"] = prefs
 
     # basic guard: need at least one strong signal
-    if not prefs["cuisine"] and prefs["max_budget"] is None and prefs["location"] is None:
+    if not prefs["cuisine"] and prefs["max_budget"] is None and prefs["location_pref"] is None:
         add_message(
             "assistant",
             "I couldn't catch any specific cuisine, budget, or location 😅<br><br>"
