@@ -361,19 +361,21 @@ CUISINE_SYNONYMS = {
         "melayu", "masakan melayu", "nasi lemak",
         "lauk melayu", "lauk kampung", "kampung style",
         "masakan kampung", "ayam masak merah", "asam pedas",
-        "nasi goreng kampung", "ikan keli", "ikan bawal", "sambal"
+        "nasi goreng kampung", "ikan keli", "ikan bawal", "sambal",
+        "nasi", "nasi goreng"
     ],
 
     "Chinese": [
         "cina", "chinese", "char kuey teow", "ckt",
         "dim sum", "wantan", "wonton", "claypot", "fried rice chinese",
-        "kongfu", "kung fu"
+        "kongfu", "kung fu", "mee", "kuey teow"
     ],
 
     "Mamak": [
         "mamak", "nasi kandar", "roti canai", "roti telur",
         "roti tampal", "maggi goreng", "mee goreng mamak",
-        "teh tarik", "nasi goreng mamak"
+        "teh tarik", "nasi goreng", "mee", "mee goreng"
+        "maggi"
     ],
 
     "Indian": [
@@ -399,13 +401,14 @@ CUISINE_SYNONYMS = {
 
     "Nasi Campur": [
         "nasi campur", "lauk campur", "mixed rice", "economy rice",
-        "kedai campur", "nasi berlauk"
+        "kedai campur", "nasi berlauk", "lauk", "nasi"
     ],
 
     "Thailand": [
         "thai", "tomyam", "tom yam", "paprik",
         "pad kra pao", "thai food", "kerabu maggi",
-        "somtam"
+        "somtam", "nasi goreng", "siam", "kuey teow",
+        "maggi"
     ],
 
     "Arabic": [
@@ -430,7 +433,8 @@ CUISINE_SYNONYMS = {
         "carbonara", "bolognese", "lasagna", "grilled chicken"
     ],
 
-    "Indonesian": ["indo", "gepuk", "bakso", "penyet", "nasi padang"]
+    "Indonesian": ["indo", "gepuk", "bakso", "penyet", "nasi padang"],
+
 }
 
 
