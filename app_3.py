@@ -87,6 +87,10 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     max_budget = preferences.get("max_budget")
     budget_level = preferences.get("budget_level")
     max_travel = preferences.get("max_travel")
+    # detect if user wants dessert
+    user_wants_dessert = any(
+        c.lower() == "dessert" for c in cuisine_list
+    ) or ("dessert" in cuisine_pref.lower())
 
     # buang smua restos not open today
     if only_open_today:
@@ -101,6 +105,19 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     elif cuisine_pref:
         mask_cuisine = df["cuisine"].astype(str).str.contains(cuisine_pref, case=False, na=False)
         df.loc[mask_cuisine, "score_cuisine"] += 40
+
+    # penalise dessert place if the user did not mention dessert 
+    if not user_wants_dessert and meal_type in ["Breakfast", "Lunch", "Dinner"]:
+        cuisine_lower = df["cuisine"].astype(str).str.lower()
+
+        # dessert-only or dessert-focused: has "dessert" but not main meals
+        dessert_only = (
+            cuisine_lower.str.contains("dessert", na=False)
+            & ~cuisine_lower.str.contains("malay|nasi campur|western|mamak|indian|arabic|thai|fast food", na=False)
+        )
+
+        # reduce their cuisine score so they won’t be recommended unless everything else is really bad
+        df.loc[dessert_only, "score_cuisine"] -= 25
 
     # ------------ BUDGET SCORING --------------------
     if max_budget is not None:
