@@ -344,7 +344,7 @@ CUISINE_SYNONYMS = {
         "melayu", "masakan melayu", "nasi lemak",
         "lauk melayu", "lauk kampung", "kampung style",
         "masakan kampung", "ayam masak merah", "asam pedas",
-        "nasi goreng kampung", "ikan keli", "ikan bawal"
+        "nasi goreng kampung", "ikan keli", "ikan bawal", "sambal"
     ],
 
     "Chinese": [
@@ -376,7 +376,7 @@ CUISINE_SYNONYMS = {
 
     "Fast Food": [
         "kfc", "mcd", "mcD", "burger king", "a&w", "texas",
-        "marrybrown", "pizza hut", "dominos", "subway",
+        "marrybrown", "pizza", "dominos", "subway",
         "fast food", "burger"
     ],
 
@@ -613,10 +613,14 @@ def main():
     st.session_state["last_prefs"] = prefs
 
     # basic guard: need at least one strong signal
-    if not prefs["cuisine"] and prefs["max_budget"] is None and prefs["location_pref"] is None:
+    if (
+            not prefs["cuisine"]
+            and prefs["max_budget"] is None
+            and (not prefs["location_pref"] or prefs["location_pref"].lower() == "any")
+    ):
         add_message(
             "assistant",
-            "I couldn't catch any specific cuisine, budget, or location 😅<br><br>"
+            "Prompt too general, I couldn't catch any specific cuisine, budget, or location 😅<br><br>"
             "Try including <b>at least one detail</b>, e.g.:<br>"
             "- `cheap Malay food`<br>"
             "- `halal Western lunch under RM15`<br>"
