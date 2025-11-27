@@ -146,7 +146,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     # ------------------- HALAL SCORING -------------------------
     if halal_pref:
         halal_col = df["halal"].astype(str).str.lower()
-        if halal_pref.lower() == "halal":
+        if halal_pref.lower() == "halal only":
             df.loc[halal_col.str.contains("yes", na=False), "score_halal"] += 10
             df.loc[~halal_col.str.contains("yes", na=False), "score_halal"] -= 20
 
@@ -154,7 +154,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     if location_pref and location_pref.lower() != "any":
         loc_series = df["location"].astype(str)
 
-        # smua yang ~Inside UTP considered "outside"
+        # semua yang ~Inside UTP considered "outside"
         mask_inside = loc_series.str.contains("Inside UTP", case=False, na=False)
         mask_outside = ~mask_inside
 
@@ -468,7 +468,7 @@ def pick_meal_type(t):
 def pick_halal_pref(t):
     t = t.lower()
     if "halal" in t: return "Halal only"
-    return "Doesn't matter"
+    return "-"
 # ====================================================
 
 # ================= Travel Time Pref =================
