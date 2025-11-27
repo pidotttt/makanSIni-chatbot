@@ -146,7 +146,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     # ------------------- HALAL SCORING -------------------------
     if halal_pref:
         halal_col = df["halal"].astype(str).str.lower()
-        if halal_pref.lower() == "halal":
+        if halal_pref.lower() == "halal only":
             df.loc[halal_col.str.contains("yes", na=False), "score_halal"] += 10
             df.loc[~halal_col.str.contains("yes", na=False), "score_halal"] -= 20
 
@@ -154,7 +154,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
     if location_pref and location_pref.lower() != "any":
         loc_series = df["location"].astype(str)
 
-        # smua yang ~Inside UTP considered "outside"
+        # semua yang ~Inside UTP considered "outside"
         mask_inside = loc_series.str.contains("Inside UTP", case=False, na=False)
         mask_outside = ~mask_inside
 
@@ -173,7 +173,7 @@ def score_restaurants(df, preferences, only_open_today=True, debug_mode=False):
         else:
             # Normal case: reward exact match to the preferred location
             mask_loc = loc_series.str.contains(location_pref, case=False, na=False)
-            df.loc[mask_loc, "score_location"] += 20
+            df.loc[mask_loc, "score_location"] += 30
 
     # ------------------------ RATING SCORING -------------------
     df["score_rating"] += df["rating"].fillna(0) * 2
@@ -344,7 +344,7 @@ CUISINE_SYNONYMS = {
         "melayu", "masakan melayu", "nasi lemak",
         "lauk melayu", "lauk kampung", "kampung style",
         "masakan kampung", "ayam masak merah", "asam pedas",
-        "nasi goreng kampung", "ikan keli", "ikan bawal"
+        "nasi goreng kampung", "ikan keli", "ikan bawal", "sambal"
     ],
 
     "Chinese": [
@@ -376,7 +376,7 @@ CUISINE_SYNONYMS = {
 
     "Fast Food": [
         "kfc", "mcd", "mcD", "burger king", "a&w", "texas",
-        "marrybrown", "pizza hut", "dominos", "subway",
+        "marrybrown", "pizza", "dominos", "subway",
         "fast food", "burger"
     ],
 
@@ -468,7 +468,7 @@ def pick_meal_type(t):
 def pick_halal_pref(t):
     t = t.lower()
     if "halal" in t: return "Halal only"
-    return "Doesn't matter"
+    return "-"
 # ====================================================
 
 # ================= Travel Time Pref =================
@@ -613,14 +613,18 @@ def main():
     st.session_state["last_prefs"] = prefs
 
     # basic guard: need at least one strong signal
-    if not prefs["cuisine"] and prefs["max_budget"] is None and prefs["max_travel"] is None:
+    if (
+            not prefs["cuisine"]
+            and prefs["max_budget"] is None
+            and (not prefs["location_pref"] or prefs["location_pref"].lower() == "any")
+    ):
         add_message(
             "assistant",
-            "I couldn't catch any specific cuisine, budget, or distance 😅<br><br>"
+            "Prompt too general, I couldn't catch any specific cuisine, budget, or location 😅<br><br>"
             "Try including <b>at least one detail</b>, e.g.:<br>"
             "- `cheap Malay food`<br>"
             "- `halal Western lunch under RM15`<br>"
-            "- `any cuisine within 5 mins from UTP`"
+            "- `any cuisine outside UTP`"
         )
         st.rerun()
 
