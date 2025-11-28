@@ -471,7 +471,7 @@ def pick_meal_type(t):
 
 def pick_halal_pref(t):
     t = t.lower()
-    if "halal" in t: return "Halal only"
+    if re.search(r"\bhalal\b", t): return "Halal only"
     return "-"
 # ====================================================
 
