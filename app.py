@@ -23,7 +23,7 @@ st.markdown("""
 # Data loading & scoring
 # ==========================
 
-CSV_FILE = "Survey on Restaurant around Seri Iskandar (Responses) - Clean Version.csv"
+CSV_FILE = "Restaurant Survey Around Seri Iskandar ( Clean Version).csv"
 
 
 def load_catalog():
@@ -704,3 +704,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
